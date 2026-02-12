@@ -1,22 +1,41 @@
-/*Problem: A secret system stores code names in forward order. To display them in mirror format, you must transform the given code name so that its characters appear in the opposite order.
+/*Problem: Write a program to check whether a given matrix is symmetric. A matrix is said to be symmetric if it is a square matrix and is equal to its transpose (i.e., element at position [i][j] is equal to element at position [j][i] for all valid i and j).
 
 Input:
-- Single line: a lowercase string containing only alphabetic characters (no spaces)
+- First line: two integers m and n representing the number of rows and columns
+- Next m lines: n integers each representing the elements of the matrix
 
 Output:
-- Print the transformed code name after applying the mirror operation*/
+- Print "Symmetric Matrix" if the given matrix is symmetric
+- Otherwise, print "Not a Symmetric Matrix"*/
 #include <stdio.h>
 
 int main() {
-    char s[100];
-    fgets(s, sizeof(s), stdin);
-    int length = 0;
-    while (s[length] != '\0' && s[length] != '\n') {
-        length++;
+    int m, n;
+
+    scanf("%d %d", &m, &n);
+
+    int a[100][100];
+
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            scanf("%d", &a[i][j]);
+        }
     }
-    for (int i = length - 1; i >= 0; i--) {
-        printf("%c", s[i]);
+
+    if(m != n) {
+        printf("Not a Symmetric Matrix");
+        return 0;
     }
-                 
+
+    for(int i = 0; i < m; i++) {
+        for(int j = 0; j < n; j++) {
+            if(a[i][j] != a[j][i]) {
+                printf("Not a Symmetric Matrix");
+                return 0;
+            }
+        }
+    }
+
+    printf("Symmetric Matrix");
     return 0;
 }
