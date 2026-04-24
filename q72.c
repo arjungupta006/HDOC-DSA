@@ -1,4 +1,22 @@
-// Question 72
-// Date: 2026-04-14
 #include <stdio.h>
-int main(){return 0;}
+#include <string.h>
+
+int main() {
+    char s[1000];
+    scanf("%s", s);
+
+    int freq[26] = {0};
+    int i;
+
+    for(i = 0; s[i] != '\0'; i++) {
+        int idx = s[i] - 'a';
+        freq[idx]++;
+        if(freq[idx] == 2) {
+            printf("%c", s[i]);
+            return 0;
+        }
+    }
+
+    printf("-1");
+    return 0;
+}
