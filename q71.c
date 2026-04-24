@@ -1,4 +1,49 @@
-// Question 71
-// Date: 2026-04-13
 #include <stdio.h>
-int main(){return 0;}
+#include <string.h>
+
+#define EMPTY -1
+
+int main() {
+    int m, q, i;
+    scanf("%d", &m);
+    scanf("%d", &q);
+
+    int table[m];
+    for(i = 0; i < m; i++)
+        table[i] = EMPTY;
+
+    while(q--) {
+        char op[10];
+        int key;
+        scanf("%s %d", op, &key);
+
+        int h = key % m;
+
+        if(strcmp(op, "INSERT") == 0) {
+            for(i = 0; i < m; i++) {
+                int idx = (h + i*i) % m;
+                if(table[idx] == EMPTY) {
+                    table[idx] = key;
+                    break;
+                }
+            }
+        } else if(strcmp(op, "SEARCH") == 0) {
+            int found = 0;
+            for(i = 0; i < m; i++) {
+                int idx = (h + i*i) % m;
+                if(table[idx] == key) {
+                    found = 1;
+                    break;
+                }
+                if(table[idx] == EMPTY)
+                    break;
+            }
+            if(found)
+                printf("FOUND\n");
+            else
+                printf("NOT FOUND\n");
+        }
+    }
+
+    return 0;
+}
